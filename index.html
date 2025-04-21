@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Can Be Funny</title>
+  <style>
+    span {
+      display:inline-block;
+      transition: transform 0.2s ease;
+    }
+    body {font-size:35px;
+      background-color:brown;
+      color:blanchedalmond;
+      text-align: center;
+      font-family: 'Comic Sans MS', sans-serif;
+      margin-top: 150px;
+    }
+    #magicButton {
+      position: absolute;
+      font-size: 18px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="dancer">Armin Alibegović👽</h1>
+<p>Try clicking the magical photo... if you can 😏</p>
+<img id="magicButton" src="Images/armin1.jpg" width="200px" height="230px">
+<p id="test"></p>
+
+<script>
+  const button = document.getElementById('magicButton');
+
+  // Function to move button to a random position
+  function moveButton() {
+    const maxX = window.innerWidth - button.offsetWidth;
+    const maxY = window.innerHeight - button.offsetHeight;
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
+    button.style.left = `${newX}px`;
+    button.style.top = `${newY}px`;
+  }
+
+  // Button dodges your mouse
+  button.addEventListener('mouseover', moveButton);
+
+  // But what if you click it fast enough?
+  const text = document.getElementById("text");
+  button.addEventListener('click', () => {
+    test.textContent = "Whoa! Uspjelo ti je... Svaka čast! You win! 😲";
+  });
+  const dancer = document.getElementById("dancer");
+  const chars = dancer.textContent.split('');
+  dancer.textContent = '';
+  
+  chars.forEach(char =>{
+    const span = document.createElement('span');
+    span.textContent = char;
+    dancer.appendChild(span);
+  });
+
+  setInterval(()=>{
+    document.querySelectorAll('#dancer span').forEach(letter =>{
+      const x = (Math.random() - 0.5) * 20;
+      const y = (Math.random() - 0.5) * 20;
+      letter.style.transform = `translate(${x}px, ${y}px) rotate(${x}deg)`;
+    });
+  }, 300);
+</script>
+
+</body>
+</html>
